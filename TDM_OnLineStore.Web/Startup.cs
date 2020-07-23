@@ -51,7 +51,7 @@ namespace TDM_OnLineStore.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    template: "{controller}/{action=Index}/{id?}");         //{id?}  =>  Allows id to be null
             });
 
             app.UseSpa(spa =>
@@ -63,7 +63,11 @@ namespace TDM_OnLineStore.Web
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    ////RUNNING FROM THE ASP.NET Core SERVER (IIS)
+                    //spa.UseAngularCliServer(npmScript: "start");
+
+                    //RUNNING FROM THE ANGULAR SERVER
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 }
             });
         }
