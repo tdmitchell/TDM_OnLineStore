@@ -9,10 +9,11 @@ namespace TDM_OnLineStore.Dominium.Models.Entity
     {
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
-        public int UserId { get; set; }
-
-        //public virtual User User { get; set; }           // ------------------------ !!!! TO CHECK !!!! ------------------------ 
         public DateTime DeliveryDate { get; set; }
+        
+        //Relashionship with User
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
 
         #region Address
         /// <summary>

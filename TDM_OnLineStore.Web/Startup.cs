@@ -3,31 +3,48 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace TDM_OnLineStore.Web
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("config.json", optional: false, reloadOnChange: true);
+            Configuration = builder.Build();
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            // Configuring the Connection to the DB
+            var connectionString = Configuration.GetConnectionString("TDM_OnLineStoreDB");
+            services.AddDbContext<AppDbContext>(opition =>
+                                                  opition.UseMySql(connectionString,
+                                                                     m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
+
+
+
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -51,7 +68,7 @@ namespace TDM_OnLineStore.Web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");         //{id?}  =>  Allows id to be null
+                    template: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
@@ -63,13 +80,14 @@ namespace TDM_OnLineStore.Web
 
                 if (env.IsDevelopment())
                 {
-                    ////RUNNING FROM THE ASP.NET Core SERVER (IIS)
-                    //spa.UseAngularCliServer(npmScript: "start");
+                    //RUNNING FROM THE ASP.NET Core SERVER (IIS)
+                    spa.UseAngularCliServer(npmScript: "start");
 
                     //RUNNING FROM THE ANGULAR SERVER
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 }
             });
         }
     }
 }
+
