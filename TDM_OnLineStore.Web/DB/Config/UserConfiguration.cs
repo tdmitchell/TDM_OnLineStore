@@ -34,7 +34,8 @@ namespace TDM_OnLineStore.Repository.Config
                 .IsRequired()
                 .HasMaxLength(50);
 
-            //builder.Property(u => u.Orders);
+            builder.HasMany(u => u.Orders)
+                .WithOne(o => o.User);
         }
     }
 }

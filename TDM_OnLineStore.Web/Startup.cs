@@ -28,22 +28,17 @@ namespace TDM_OnLineStore.Web
 
             // Configuring the Connection to the DB
             var connectionString = Configuration.GetConnectionString("TDM_OnLineStoreDB");
-            services.AddDbContext<AppDbContext>(opition =>
-                                                  opition.UseMySql(connectionString,
-                                                                     m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
-
-
-
+            services.AddDbContextPool<AppDbContext>(opition =>                              // --- It was AddDbContext. Changed to better performance --- 
+                                                     opition.UseLazyLoadingProxies()       // --- Allows the automatic loading of all relationship between tables in the DB ---
+                                                            .UseMySql(connectionString,
+                                                                         m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
-
-
         }
-
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -28,7 +28,7 @@ namespace TDM_OnLineStore.Dominium.Models.Entity
 
         #region Payment
         public int PaymentId { get; set; }
-        public Payment Payment { get; set; }
+        public virtual Payment Payment { get; set; }
         #endregion
 
         /// <summary>
