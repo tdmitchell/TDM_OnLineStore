@@ -4,8 +4,8 @@
 
 
   "ConnectionStrings": {
-    "TDM_OnLineStoreDB": "server=localhost;uid=root;pwd=admin;database=TDM_OnLineStoreDB"
-    //"Key" :  "Value"
+    //"TDM_OnLineStoreDB": "server=localhost;uid=root;pwd=admin;database=TDM_OnLineStoreDB",
+    "TDM_OnLineStoreDB": "server=localhost;uid=root;pwd=Password;database=TDM_OnLineStoreDB"
   }
 }
 

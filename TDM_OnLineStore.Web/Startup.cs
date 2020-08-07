@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 
+
 namespace TDM_OnLineStore.Web
 {
     public class Startup
@@ -28,10 +29,18 @@ namespace TDM_OnLineStore.Web
 
             // Configuring the Connection to the DB
             var connectionString = Configuration.GetConnectionString("TDM_OnLineStoreDB");
-            services.AddDbContextPool<AppDbContext>(opition =>                              // --- It was AddDbContext. Changed to better performance --- 
-                                                     opition.UseLazyLoadingProxies()       // --- Allows the automatic loading of all relationship between tables in the DB ---
-                                                            .UseMySql(connectionString,
-                                                                         m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
+            services.AddDbContext<AppDbContext>(option =>
+                                                         option.UseLazyLoadingProxies()
+                                                         .UseMySql(connectionString,
+                                                                             m => m.MigrationsAssembly("QuickBuy.Repositorio")));
+
+
+            //services.AddDbContextPool<AppDbContext>(opition =>                              // --- It was AddDbContext. Changed to better performance --- 
+            //                                      opition.UseLazyLoadingProxies()       // --- Allows the automatic loading of all relationship between tables in the DB ---
+            //                                      .UseMySql(connectionString,
+            //                                                         m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
+
+
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

@@ -9,8 +9,8 @@ namespace TDM_OnLineStore.Repository.Repositories
     {
         public BaseRepository()
         {
-
         }
+
         public void Add(TEntity entity)
         {
             throw new NotImplementedException();

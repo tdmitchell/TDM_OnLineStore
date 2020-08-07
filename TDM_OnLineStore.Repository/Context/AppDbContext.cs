@@ -1,22 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using TDM_OnLineStore.Dominium.Models.Entity;
 using TDM_OnLineStore.Repository.Config;
 
-namespace TDM_OnLineStore.Web
+namespace TDM_OnLineStore.Repository
 {
-    public class AppDbContext : DbContext
+    class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
+
         public AppDbContext(DbContextOptions options) : base(options)
-        {
+        {                
         }
 
         //Construct the Model for this Context
@@ -31,5 +31,6 @@ namespace TDM_OnLineStore.Web
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

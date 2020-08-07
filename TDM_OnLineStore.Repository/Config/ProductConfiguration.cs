@@ -27,7 +27,6 @@ namespace TDM_OnLineStore.Repository.Config
             builder
                 .Property(p => p.Price)
                 .IsRequired();
-
         }
     }
 }
