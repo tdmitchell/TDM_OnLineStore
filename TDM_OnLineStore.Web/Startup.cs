@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
-
+using TDM_OnLineStore.Repository;
 
 namespace TDM_OnLineStore.Web
 {
@@ -29,18 +28,10 @@ namespace TDM_OnLineStore.Web
 
             // Configuring the Connection to the DB
             var connectionString = Configuration.GetConnectionString("TDM_OnLineStoreDB");
-            services.AddDbContext<AppDbContext>(option =>
-                                                         option.UseLazyLoadingProxies()
-                                                         .UseMySql(connectionString,
-                                                                             m => m.MigrationsAssembly("QuickBuy.Repositorio")));
-
-
-            //services.AddDbContextPool<AppDbContext>(opition =>                              // --- It was AddDbContext. Changed to better performance --- 
-            //                                      opition.UseLazyLoadingProxies()       // --- Allows the automatic loading of all relationship between tables in the DB ---
-            //                                      .UseMySql(connectionString,
-            //                                                         m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
-
-
+            services.AddDbContextPool<AppDbContext>(opition =>                              // --- It was AddDbContext. Changed to better performance --- 
+                                                  opition.UseLazyLoadingProxies()           // --- Allows the automatic loading of all relationship between tables in the DB ---
+                                                  .UseMySql(connectionString,
+                                                                     m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

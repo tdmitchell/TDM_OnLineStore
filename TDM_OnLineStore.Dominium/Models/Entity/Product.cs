@@ -16,15 +16,14 @@ namespace TDM_OnLineStore.Dominium.Models.Entity
         #region Validation / Business Rules
         public override void Validate()
         {
+            EmptyValidationMessage();
+
             if (string.IsNullOrEmpty(Name))
                 AddWarn("WARN: Please inform the Product's Name");
-
             if (string.IsNullOrEmpty(Description))
                 AddWarn("WARN: Please inform the Product's Description");
-
             if (string.IsNullOrEmpty(Price.ToString()))
                 AddWarn("WARN: Please inform the Product's Price");
-
             //if (!(Price == null))
             //    AddWarn("WARN: Please inform the Product's Price");
         }

@@ -7,7 +7,7 @@ using TDM_OnLineStore.Repository.Config;
 
 namespace TDM_OnLineStore.Repository
 {
-    class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -16,7 +16,7 @@ namespace TDM_OnLineStore.Repository
         public DbSet<Payment> Payments { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
-        {                
+        {
         }
 
         //Construct the Model for this Context
