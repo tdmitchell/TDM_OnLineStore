@@ -8,5 +8,8 @@ namespace TDM_OnLineStore.Repository.Repositories
 {
     public class OrderRepository : BaseRepository<Order>, IOrderRepository
     {
+        public OrderRepository(AppDbContext appDbContext) : base(appDbContext)
+        {
+        }
     }
 }

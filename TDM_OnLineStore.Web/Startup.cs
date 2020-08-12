@@ -21,19 +21,19 @@ namespace TDM_OnLineStore.Web
             Configuration = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            // Configuring the Connection to the DB
+            /// Configure the Context that will be used (Connection to the DB)
             var connectionString = Configuration.GetConnectionString("TDM_OnLineStoreDB");
             services.AddDbContextPool<AppDbContext>(opition =>                              // --- It was AddDbContext. Changed to better performance --- 
                                                   opition.UseLazyLoadingProxies()           // --- Allows the automatic loading of all relationship between tables in the DB ---
                                                   .UseMySql(connectionString,
                                                                      m => m.MigrationsAssembly("TDM_OnLineStore.Repository")));
 
-            // In production, the Angular files will be served from this directory
+            /// In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -41,7 +41,7 @@ namespace TDM_OnLineStore.Web
         }
 
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

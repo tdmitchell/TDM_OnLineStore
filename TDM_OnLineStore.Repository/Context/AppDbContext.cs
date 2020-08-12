@@ -19,7 +19,7 @@ namespace TDM_OnLineStore.Repository
         {
         }
 
-        //Construct the Model for this Context
+        ///Mapping Properties and Relationships (Construct the Model for this Context)
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ///Inform ALL Configuration Classes here            
@@ -29,8 +29,29 @@ namespace TDM_OnLineStore.Repository
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
 
+            ///Seed data
+            modelBuilder.Entity<Payment>().HasData(
+                new Payment()
+                {
+                    Id = 1,
+                    Name = "Boleto",                        // ------------------------ !!!! TRANSLATE !!!! ------------------------ 
+                    Description = "Payment by Boleto"       // ------------------------ !!!! TRANSLATE !!!! ------------------------ 
+                },
+                 new Payment()
+                 {
+                     Id = 2,
+                     Name = "Credict Card",                        
+                     Description = "Payment by Credict Card"
+                 },
+                 new Payment()
+                 {
+                     Id = 3,
+                     Name = "Deposit",
+                     Description = "Payment by Deposit"
+                 }
+                );
+
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

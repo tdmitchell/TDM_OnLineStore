@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using TDM_OnLineStore.Dominium.Models.Interface;
 
@@ -7,38 +8,55 @@ namespace TDM_OnLineStore.Repository.Repositories
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
-        public BaseRepository()
-        {
-        }
+        #region Given access to the Context
+        protected readonly AppDbContext AppDbContext;
 
+        public BaseRepository(AppDbContext appDbContext)
+        {
+            AppDbContext = appDbContext;
+        }
+        #endregion
+
+        #region CREATE
         public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            AppDbContext.Set<TEntity>().Add(entity);
+            AppDbContext.SaveChanges();
         }
+        #endregion
 
-        public void Delete(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
+        #region READ
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return AppDbContext.Set<TEntity>().ToList();
         }
 
         public TEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            return AppDbContext.Set<TEntity>().Find(id);
         }
+        #endregion
 
+        #region UPDATE
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            AppDbContext.Set<TEntity>().Update(entity);
+            AppDbContext.SaveChanges();
         }
+        #endregion
+
+        #region DELETE
+        public void Delete(TEntity entity)
+        {
+            AppDbContext.Set<TEntity>().Remove(entity);
+            AppDbContext.SaveChanges();
+        }
+
+        /// Discart from the memory
+        public void Dispose()
+        {
+            AppDbContext.Dispose();
+        }
+        #endregion
     }
 }
