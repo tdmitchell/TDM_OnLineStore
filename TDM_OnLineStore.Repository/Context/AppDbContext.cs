@@ -51,6 +51,31 @@ namespace TDM_OnLineStore.Repository
                  }
                 );
 
+            ///Seed data
+            modelBuilder.Entity<Product>().HasData(
+                new Product()
+                {
+                    Id = 1,
+                    Name = "Product Test 1",
+                    Description = "Description for Product 1",
+                    Price = 10
+                },
+                 new Product()
+                 {
+                     Id = 2,
+                     Name = "Credict Card",
+                     Description = "Description for Product 2",
+                     Price = 20.2M
+                 },
+                 new Product()
+                 {
+                     Id = 3,
+                     Name = "Deposit",
+                     Description = "Description for Product 3",
+                     Price = 30.3M
+                 }
+                );
+
             base.OnModelCreating(modelBuilder);
         }
     }
