@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\dist\" />
     <Folder Include="ClientApp\src\app\user\register\" />
   </ItemGroup>
 

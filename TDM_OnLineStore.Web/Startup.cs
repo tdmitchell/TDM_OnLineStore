@@ -80,11 +80,11 @@ namespace TDM_OnLineStore.Web
 
                 if (env.IsDevelopment())
                 {
-                    ////RUNNING FROM THE ASP.NET Core SERVER (IIS)
-                    //spa.UseAngularCliServer(npmScript: "start");
+                    //RUNNING FROM THE ASP.NET Core SERVER (IIS)
+                    spa.UseAngularCliServer(npmScript: "start");
 
-                    //RUNNING FROM THE ANGULAR SERVER
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
+                    ////RUNNING FROM THE ANGULAR SERVER
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
                 }
             });
         }
