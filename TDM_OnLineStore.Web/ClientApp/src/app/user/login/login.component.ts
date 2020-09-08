@@ -10,7 +10,7 @@ import { User } from "../../model/user";
 
 export class LoginComponent {
   public user;
-  public authentifiedUser: boolean;
+  //public authentifiedUser: boolean;
 
   constructor() {
     this.user = new User();
