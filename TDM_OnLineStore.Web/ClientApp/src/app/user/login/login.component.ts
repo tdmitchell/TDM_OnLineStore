@@ -1,4 +1,5 @@
 import { Component } from "@angular/core"
+import { User } from "../../model/user";
 
 @Component({
   selector: "app-login",
@@ -8,14 +9,21 @@ import { Component } from "@angular/core"
 
 
 export class LoginComponent {
-  public email = "";
-  public password = "";
+  public user;
+  public authentifiedUser: boolean;
 
+  constructor() {
+    this.user = new User();
+  }
+
+  //Adding a Image
   public imageAddress = "https://thumbs.dreamstime.com/t/buy-now-icon-web-button-buy-now-icon-web-button-vector-illustration-isolated-white-background-shadow-119950672.jpg";
   public title = "Buy Now Image";
 
   enter(): void {
-    alert(this.email);
+    if (this.user.email == "a" && this.user.password == "1") {
+      this.authentifiedUser = true;
+    }
   }
 
 
